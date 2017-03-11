@@ -103,7 +103,7 @@ Instance name for the Grafana installation. Defaults to `HOSTNAME` environment v
 
 	grafana_instance_name: ${HOSTNAME}
 
-The ip address to bind to, empty will bind to all interfaces. Defaults to ` `.
+The ip address to bind to, empty will bind to all interfaces. Defaults to `[]`.
 
 	grafana_http_addr:
 
@@ -135,11 +135,11 @@ Enable `gzip` compression. Boolean. Defaults to `False`.
 
 	grafana_enable_gzip: False
 
-Path to certificate file for https. Defaults to ` `.
+Path to certificate file for https. Defaults to `[]`.
 
 	grafana_cert_file:
 
-Path to key file for https certificate. Defaults to ` `.
+Path to key file for https certificate. Defaults to `[]`.
 
 	grafana_key_file:
 
@@ -179,7 +179,7 @@ Type of session provider. Either `memory`, `file`, `redis`, `mysql`, `postgres`.
 
 	grafana_session_provider: file
 
-`file` provider config options. session dir path, is relative to grafana data_path. Defaults to ` `.
+`file` provider config options. session dir path, is relative to grafana data_path. Defaults to `[]`.
 
 	grafana_session_provider_session_dir_path:
 
@@ -271,7 +271,7 @@ Set to false to disable all checks to https://grafana.net for new vesions (grafa
 
 	grafana_analytics_check_for_updates: True
 
-Google Analytics universal tracking code, only enabled if you specify an id here. Defaults to ` `.
+Google Analytics universal tracking code, only enabled if you specify an id here. Defaults to `[]`.
 
 	grafana_analytics_google_analytics_ua_id: ""
 
@@ -303,7 +303,7 @@ Disable gravatar profile images. Boolean. Defaults to `False`.
 
 	grafana_security_disable_gravatar: False
 
-Data source proxy whitelist. List of dictonaries for data source proxy whitelist. Defaults to ` `.
+Data source proxy whitelist. List of dictonaries for data source proxy whitelist. Defaults to `[]`.
 
 	grafana_data_source_proxy_whitelist:
 	-
@@ -346,11 +346,11 @@ API URL for Github authentication. Defaults to `https://api.github.com/user`.
 
 	grafana_auth_github_api_url: https://api.github.com/user
 
-Team ids for Github authentication. Defaults to ` `.
+Team ids for Github authentication. Defaults to `[]`.
 
 	grafana_auth_github_team_ids:
 
-Allowed organizations for Github authentication. Defaults to ` `.
+Allowed organizations for Github authentication. Defaults to `[]`.
 
 	grafana_auth_github_allowed_organizations:
 
@@ -386,7 +386,7 @@ API URL for Google authentication. Defaults to `https://www.googleapis.com/oauth
 
 	grafana_auth_google_api_url: https://www.googleapis.com/oauth2/v1/userinfo
 
-Allowed domains for Google authentication. Defaults to ` `.
+Allowed domains for Google authentication. Defaults to `[]`.
 
 	grafana_auth_google_allowed_domains:
 
@@ -426,11 +426,11 @@ API URL for generic oauth authentication. Defaults to `https://foo.bar/user`.
 
 	grafana_auth_generic_oauth_api_url: https://foo.bar/user
 
-Team ids for generic oauth authentication. Defaults to ` `.
+Team ids for generic oauth authentication. Defaults to `[]`.
 
 	grafana_auth_generic_oauth_team_ids:
 
-Allowed organizations for generic oauth authentication. Defaults to ` `.
+Allowed organizations for generic oauth authentication. Defaults to `[]`.
 
 	grafana_auth_generic_oauth_allowed_organizations:
 
@@ -454,7 +454,7 @@ Scopes for grafananet authentication. Defaults to `user:email`.
 
 	grafana_auth_grafananet_scopes: user:email
 
-Allowed organizations for grafananet authentication. Defaults to ` `.
+Allowed organizations for grafananet authentication. Defaults to `[]`.
 
 	grafana_auth_grafananet_allowed_organizations:
 
@@ -474,7 +474,7 @@ Enable auto sign up for proxy authentication. Boolean. Defaults to `True`.
 
 	grafana_auth_proxy_auto_sign_up: True
 
-LDAP sync TTL for proxy authentication. Defaults to ` `.
+LDAP sync TTL for proxy authentication. Defaults to `[]`.
 
 	grafana_auth_proxy_ldap_sync_ttl:
 
@@ -506,19 +506,19 @@ SMTP host. Defaults to `localhost:25`.
 
 	grafana_smtp_host: localhost:25
 
-Username for SMTP. Defaults to ` `.
+Username for SMTP. Defaults to `[]`.
 
 	grafana_smtp_user:
 
-Password for SMTP. Defaults to ` `.
+Password for SMTP. Defaults to `[]`.
 
 	grafana_smtp_password:
 
-Certificate file for SMTP. Defaults to ` `.
+Certificate file for SMTP. Defaults to `[]`.
 
 	grafana_smtp_cert_file:
 
-Keyfile for SMTP. Defaults to ` `.
+Keyfile for SMTP. Defaults to `[]`.
 
 	grafana_smtp_key_file:
 
@@ -544,11 +544,11 @@ Log level. Either `trace`, `debug`, `info`, `warn`, `error`, `critical`. Default
 
 	grafana_log_level: info
 
-optional settings to set different levels for specific loggers. Ex. `filters = sqlstore:debug`. Defaults to ` `.
+optional settings to set different levels for specific loggers. Ex. `filters = sqlstore:debug`. Defaults to `[]`.
 
 	grafana_log_filters:
 
-Log level for `console` mode only. Defaults to ` `.
+Log level for `console` mode only. Defaults to `[]`.
 
 	grafana_log_console_level:
 
@@ -556,7 +556,7 @@ Log line format for console log. Valid options are `text`, `console` and `json`.
 
 	grafana_log_console_format: console
 
-Log level for log file mode. Defaults to ` `.
+Log level for log file mode. Defaults to `[]`.
 
 	grafana_log_file_level:
 
@@ -584,7 +584,7 @@ Expired days of log file (delete after max days). Defaults to `7`.
 
 	grafana_log_file_max_days: 7
 
-Log level for syslog. Defaults to ` `.
+Log level for syslog. Defaults to `[]`.
 
 	grafana_log_syslog_level:
 
@@ -592,19 +592,19 @@ Log line format for syslog log. Valid options are `text`, `console` and `json`. 
 
 	grafana_log_syslog_format: text
 
-Syslog network type and address. This can be `udp`, `tcp`, or `unix`. If left blank, the default unix endpoints will be used. Defaults to ` `.
+Syslog network type and address. This can be `udp`, `tcp`, or `unix`. If left blank, the default unix endpoints will be used. Defaults to `[]`.
 
 	grafana_log_syslog_network:
 
-Syslog address. Defaults to ` `.
+Syslog address. Defaults to `[]`.
 
 	grafana_log_syslog_address:
 
-Syslog facility. user, daemon and local0 through local7 are valid. Defaults to ` `.
+Syslog facility. user, daemon and local0 through local7 are valid. Defaults to `[]`.
 
 	grafana_log_syslog_facility:
 
-Syslog tag. By default, the process `argv[0]` is used. Defaults to ` `.
+Syslog tag. By default, the process `argv[0]` is used. Defaults to `[]`.
 
 	grafana_log_syslog_tag:
 
@@ -640,7 +640,7 @@ Publish interval. Defaults to `10`.
 
 	grafana_publish_interval: 10
 
-Send internal metrics to Graphite. Enable by setting the address setting (ex localhost:2003). Defaults to ` `.
+Send internal metrics to Graphite. Enable by setting the address setting (ex localhost:2003). Defaults to `[]`.
 
 	grafana_metrics_graphite_address:
 
@@ -652,31 +652,31 @@ grafana_net URL. Url used to to import dashboards directly from Grafana.net. Def
 
 	grafana_grafana_net_url: https://grafana.net
 
-External image storage provider. Used for uploading images to public servers so they can be included in slack/email messages. You can choose between (`s3`, `webdav`). Defaults to ` `.
+External image storage provider. Used for uploading images to public servers so they can be included in slack/email messages. You can choose between (`s3`, `webdav`). Defaults to `[]`.
 
 	grafana_external_image_storage_provider:
 
-Bucket URL for S3 external image storage. Defaults to ` `.
+Bucket URL for S3 external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_s3_bucket_url:
 
-Access key for S3 external image storage. Defaults to ` `.
+Access key for S3 external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_s3_access_key:
 
-Secret key for S3 external image storage. Defaults to ` `.
+Secret key for S3 external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_s3_secret_key:
 
-URL for WebDAV external image storage. Defaults to ` `.
+URL for WebDAV external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_webdav_url:
 
-Username for WebDAV external image storage. Defaults to ` `.
+Username for WebDAV external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_webdav_username:
 
-Password for WebDAV external image storage. Defaults to ` `.
+Password for WebDAV external image storage. Defaults to `[]`.
 
 	grafana_external_image_storage_webdav_password:
 
