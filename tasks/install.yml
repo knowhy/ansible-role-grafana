@@ -45,7 +45,7 @@
 
 - name: Unpack Grafana package archive.
   unarchive:
-    src: "/opt/grafana-{{ grafana_installed_version }}.linux-x64.tar.gz"
+    src: "/opt/grafana-{{ grafana_installed_version.stdout }}.linux-x64.tar.gz"
     dest: /opt/
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
