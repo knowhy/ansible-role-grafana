@@ -22,6 +22,7 @@
     - name: Set checksum variable.
       shell: "cat /opt/grafana-{{ grafana_version }}.linux-x64.tar.gz.sha256"
       register: checksum
+      changed_when: False
 
     - name: Download Grafana nightly build package archive.
       get_url:
@@ -42,6 +43,7 @@
     - name: Set checksum variable.
       shell: "cat /opt/grafana-{{ grafana_version }}.linux-x64.tar.gz.sha256"
       register: checksum
+      changed_when: False
 
     - name: Download Grafana release build package archive.
       get_url:
@@ -68,6 +70,7 @@
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
     recurse: True
+  changed_when: False
 
 # - name: Unpack Grafana package archive.
 #   unarchive:
