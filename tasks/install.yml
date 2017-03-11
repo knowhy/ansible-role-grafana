@@ -44,3 +44,4 @@
     dest: /opt/
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
+    mode: 0770
