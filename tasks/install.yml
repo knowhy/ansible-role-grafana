@@ -1,5 +1,17 @@
 ---
 
+- name: Ensure Grafana group is present.
+  group:
+    name: "{{ grafana_group }}"
+    state: present
+
+- name: Ensure Grafana user is present.
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    system: True
+    state: present
+
 - block:
 
     - name: Download checksum file for Grafana nightly build package archive.

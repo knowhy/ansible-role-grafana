@@ -5,18 +5,6 @@
   register: grafana_installed_version
   changed_when: False
 
-- name: Ensure Grafana group is present.
-  group:
-    name: "{{ grafana_group }}"
-    state: present
-
-- name: Ensure Grafana user is present.
-  user:
-    name: "{{ grafana_user }}"
-    group: "{{ grafana_group }}"
-    system: True
-    state: present
-
 - name: Ensure directories for Grafana are present.
   file:
     path: "{{ item }}"
