@@ -1,0 +1,81 @@
+---
+
+- name: Get grafana latest version.
+  shell: ls /opt/ | grep grafana | grep -v tar | tail -n 1 | cut -d - -f 2-3
+  register: grafana_installed_version
+  when: grafana_version == 'latest'
+
+- set_fact:
+    grafana_installed_version: "{{ grafana_version }}"
+  when: grafana_version != 'latest'
+
+- name: Ensure Grafana group is present.
+  group:
+    name: "{{ grafana_group }}"
+    state: present
+
+- name: Ensure Grafana user is present.
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    system: True
+    state: present
+
+- name: Ensure directories for Grafana are present.
+  file:
+    path: "{{ item }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    state: directory
+  with_items:
+    - "{{ grafana_log_dir }}"
+    - "{{ grafana_data_dir }}"
+    - "{{ grafana_config_dir }}"
+
+- block:
+    
+    - name: Ensure Systemd unit file is present.
+      template:
+        src: grafana.service.j2
+        dest: /usr/lib/systemd/system/grafana.service
+      register: grafana_unit
+    
+    - name: Reload Systemd.
+      systemd:
+        daemon_reload: True
+        name: grafana
+      when: grafana_unit | changed
+
+  when: ansible_service_mgr == 'systemd'
+
+- name: Ensure sysv init script is present.
+  template:
+    src: grafana-server.sysv.j2
+    dest: /etc/init.d/grafana
+    mode: 0700
+  when: ansible_service_mgr == 'sysv'
+
+- name: Ensure upstart script is present.
+  template:
+    src: grafana-server.upstart.j2
+    dest: /etc/init/grafana.conf
+    mode: 0700
+  when: ansible_service_mgr == 'upstart'
+
+- name: Ensure Grafana configuration is present.
+  template:
+    src: grafana.ini.j2
+    dest: "{{ grafana_conf_dir }}/{{ grafana_conf_file }}"
+  notify: restart grafana
+
+- name: Ensure Grafana is enabled.
+  service:
+    name: grafana
+    enabled: True
+  when: grafana_service_enabled
+
+- name: Ensure Grafana is started.
+  service:
+    name: grafana
+    state: started
+  when: grafana_service_start

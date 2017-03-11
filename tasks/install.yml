@@ -1,0 +1,13 @@
+---
+
+- name: Download Grafana package archive.
+  get_url:
+    url: "https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz"
+    dest: /opt/
+
+- name: Unpack Grafana package archive.
+  unarchive:
+    src: "/opt/grafana-{{ grafana_version }}.linux-x64.tar.gz"
+    dest: /opt/
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"

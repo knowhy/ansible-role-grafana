@@ -1,0 +1,169 @@
+---
+# defaults file for ansible-role-grafana
+
+grafana_install_grafana: False
+
+grafana_version: latest
+grafana_user: grafana
+grafana_group: grafana
+
+grafana_home: /usr/share/grafana
+grafana_log_dir: /var/log/grafana
+grafana_data_dir: /var/lib/grafana
+grafana_config_dir: /etc/grafana
+grafana_plugins_dir: /var/lib/grafana/plugin
+grafana_max_open_files: 10000
+grafana_conf_dir: /etc/grafana
+grafana_conf_file: grafana.ini
+
+grafana_restart_on_update: True
+grafana_service_enabled: False
+grafana_service_start: True
+grafana_timeout: 20
+grafana_protocol: http
+grafana_limit_no_file: 10000
+
+grafana_plugins: False
+
+grafana_instance_name: grafana
+grafana_app_mode: production
+grafana_http_port: 3000
+grafana_domain: localhost
+grafana_enforce_domain: False
+grafana_root_url: http://localhost:3000
+grafana_router_logging: False
+grafana_static_root_path: public
+grafana_enable_gzip: False
+
+grafana_database: sqlite
+grafana_database_host: 127.0.0.1
+grafana_database_port: 3306
+grafana_database_name: grafana
+grafana_database_user: root
+grafana_database_password: password
+grafana_database_ssl_mode: disable
+grafana_database_path: grafana.db
+
+grafana_session_provider: file
+grafana_session_provider_session_dir_path:
+grafana_redis_address: 127.0.0.1
+grafana_redis_port: 6379
+grafana_redis_pool_size: 100
+grafana_redis_database: grafana
+grafana_mysql_user: user
+grafana_mysql_password: password
+grafana_mysql_protocol: tcp
+grafana_mysql_address: 127.0.0.1
+grafana_mysql_port: 3306
+grafana_mysql_database_name: database_name
+grafana_postgres_user: a
+grafana_postgres_password: b
+grafana_postgres_host: localhost
+grafana_postgres_port: 5432
+grafana_postgres_database_name: c
+grafana_postgres_sslmode: disable
+
+grafana_provider_config: sessions
+grafana_cookie_name: grafana_sess
+grafana_cookie_secure: False
+grafana_session_life_time: 86400
+
+grafana_analytics_reporting_enabled: True
+grafana_analytics_check_for_updates: True
+grafana_analytics_google_analytics_ua_id: ""
+grafana_security_default_admin_user: admin
+grafana_security_admin_password: admin
+grafana_security_secret_key: SW2YcwTIb9zpOOhoPsMm
+grafana_security_login_remember_days: 7
+grafana_security_cookie_username: grafana_user
+grafana_security_cookie_remember_name: grafana_remember
+grafana_security_disable_gravatar: False
+grafana_data_source_proxy_whitelist:
+  -
+    ip_domain:
+    port:
+grafana_unauthenticated_users_role: Viewer
+
+grafana_auth_github_enabled: False
+grafana_auth_github_allow_signup: True
+grafana_auth_github_client_id: some_id
+grafana_auth_github_client_secret: some_secret
+grafana_auth_github_scopes: user:email,read:org
+grafana_auth_github_auth_url: https://github.com/login/oauth/authorize
+grafana_auth_github_token_url: https://github.com/login/oauth/access_token
+grafana_auth_github_api_url: https://api.github.com/user
+
+grafana_auth_google_enable: False
+grafana_auth_google_allow_sign_up: True
+grafana_auth_google_client_id: some_client_id
+grafana_auth_google_client_secret: some_client_secret
+grafana_auth_google_scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+grafana_auth_google_auth_url: https://accounts.google.com/o/oauth2/auth
+grafana_auth_google_token_url: https://accounts.google.com/o/oauth2/token
+grafana_auth_google_api_url: https://www.googleapis.com/oauth2/v1/userinfo
+
+grafana_auth_generic_oauth_enabled: False
+grafana_auth_generic_oauth_name: OAuth
+grafana_auth_generic_oauth_allow_sign_up: True
+grafana_auth_generic_oauth_client_id: some_id
+grafana_auth_generic_oauth_client_secret: some_secret
+grafana_auth_generic_oauth_scopes: user:email,read:org
+grafana_auth_generic_oauth_auth_url: https://foo.bar/login/oauth/authorize
+grafana_auth_generic_oauth_token_url: https://foo.bar/login/oauth/access_token
+grafana_auth_generic_oauth_api_url: https://foo.bar/user
+grafana_auth_generic_oauth_allowed_organizations:
+
+grafana_auth_grafananet_enabled: False
+grafana_auth_grafananet_allow_sign_up: True
+grafana_auth_grafananet_client_id: some_id
+grafana_auth_grafananet_client_secret: some_secret
+grafana_auth_grafananet_scopes: user:email
+grafana_auth_grafananet_allowed_organizations:
+
+grafana_auth_proxy_enabled: False
+grafana_auth_proxy_header_name: X-WEBAUTH-USER
+grafana_auth_proxy_header_property: username
+grafana_auth_proxy_auto_sign_up: True
+grafana_auth_proxy_whitelist: "192.168.1.1, 192.168.2.1"
+
+grafana_auth_basic_enabled: True
+
+grafana_auth_ldap_enabled: False
+grafana_auth_ldap_config_file: /etc/grafana/ldap.toml
+grafana_auth_ldap_allow_sign_up: True
+
+grafana_smtp_enabled: False
+grafana_smtp_host: localhost:25
+grafana_smtp_skip_verify: False
+grafana_smtp_from_address: admin@grafana.localhost
+
+grafana_emails_welcome_email: False
+
+grafana_log_mode:
+  - console
+  - file
+grafana_log_level: info
+grafana_log_console_format: console
+grafana_log_file_line_format: text
+grafana_log_file_log_rotate: True
+grafana_log_file_max_lines: 1000000
+grafana_log_file_max_size_shift: 28
+grafana_log_file_daily_rotate: True
+grafana_log_file_max_days: 7
+grafana_log_syslog_format: text
+
+grafana_event_publisher_enabled: False
+grafana_event_publisher_url: amqp://localhost/
+grafana_event_publisher_exchange: grafana_events
+
+grafana_dashboards_json_enabled: False
+grafana_dashboards_json_path: /var/lib/grafana/dashboards
+
+grafana_altering_execute_alerts: True
+
+grafana_metrics_enabled: True
+
+grafana_publish_interval: 10
+
+grafana_metrics_graphite_prefix: prod.grafana.%(instance_name)s.
+grafana_grafana_net_url: https://grafana.net

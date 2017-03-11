@@ -1,0 +1,13 @@
+description "Grafana"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 5
+
+limit nofile unlimited unlimited
+
+console log
+
+exec start-stop-daemon --chuid {{ grafana_user }} --start --exec "/opt/grafana-{{ grafana_installed_version.stdout }}/bin/grafana-server --config={{ grafana_conf_dir }}/{{ grafana_conf_file }} --pidfile=/var/run/grafana.pid"

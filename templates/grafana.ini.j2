@@ -1,0 +1,218 @@
+;app_mode = {{ grafana_app_mode }}
+;instance_name = {{ grafana_instance_name | default( ) }}
+
+[paths]
+;data = {{ grafana_data_dir }}
+;logs = {{ grafana_log_dir }}
+;plugins = {{ grafana_plugins_dir }}
+
+[server]
+;protocol = {{ grafana_protocol }}
+;http_addr = {{ grafana_http_addr | default( ) }}
+;http_port = {{ grafana_http_port }}
+;domain = {{ grafana_domain }}
+;enforce_domain = {{ grafana_enforce_domain | bool | lower }}
+;root_url = {{ grafana_root_url }}
+;router_logging = {{ grafana_router_logging | bool | lower }} 
+;static_root_path = {{ grafana_static_root_path }}
+;enable_gzip = {{ grafana_enable_gzip | bool | lower }}
+{% if grafana_protocol == 'https' %}
+;cert_file = {{ grafana_cert_file | default( ) }}
+;cert_key = {{ grafana_key_file | default( ) }}
+{% endif %}
+[database]
+;type = sqlite3
+;host = {{ grafana_database_host }}:{{ grafana_database_port }}
+;name = {{ grafana_database_name }}
+;user = {{ grafana_database_user }}
+;password = """{{ grafana_database_password }}"""
+{% if grafana_database == 'postgres' %}
+;ssl_mode = {{ grafana_database_ssl_mode }}
+{% endif %}
+{% if grafana_database == 'sqlite3' %}
+;path = {{ grafana_database_path }}
+{% endif %}
+
+[session]
+;provider = {{ grafana_session_provider }}
+{% if grafana_session_provider == 'file' %}
+file = {{ grafana_session_provider_session_dir_path }}
+{% endif %}
+{% if grafana_session_provider == 'redis' %}
+addr={{ grafana_redis_address }}:{{ grafana_redis_port }},pool_size={{ grafana_redis_pool_size }},db={{ grafana_redis_database }}
+{% endif %}
+{% if grafana_session_provider == 'mysql' %}
+{{ grafana_mysql_user }}:{{ grafana_mysql_password }}@{{ grafana_mysql_protocol }}({{ grafana_mysql_address }}:{{ grafana_mysql_port }})/{{ grafana_mysql_database_name }}
+{% endif %}
+{% if grafana_session_provider == 'postgres' %}
+user = {{ grafana_postgres_user }} password={{ grafana_postgres_password }} host={{ grafana_postgres_host }} port={{ grafana_postgres_port }} dbname={{ grafana_postgres_database_name }} sslmode={{ grafana_postgres_sslmode }}
+{% endif %}
+
+;provider_config = {{ grafana_provider_config }}
+
+;cookie_name = {{ grafana_cookie_name }}
+;cookie_secure = {{ grafana_cookie_secure | bool | lower }}
+
+;session_life_time = {{ grafana_session_life_time }}
+
+[analytics]
+;reporting_enabled = {{ grafana_analytics_reporting_enabled | bool | lower }}
+;check_for_updates = true
+;google_analytics_ua_id = {{ grafana_analytics_google_analytics_ua_id | default( ) }}
+
+[security]
+;admin_user = {{ grafana_security_default_admin_user }}
+;admin_password = {{ grafana_security_admin_password }}
+;secret_key = {{ grafana_security_secret_key }}
+;login_remember_days = {{ grafana_security_login_remember_days }}
+;cookie_username = {{ grafana_security_cookie_username }}
+;cookie_remember_name = {{ grafana_security_cookie_remember_name }}
+;disable_gravatar = {{ grafana_security_disable_gravatar | bool | lower }}
+({% for ip_domain, port in grafana_data_source_proxy_whitelist %} {{ ip_domain }}:{{ port }} {% endfor %});org_name = Main Org.
+;org_role = {{ grafana_unauthenticated_users_role }}
+
+[auth.github]
+;enabled = {{ grafana_auth_github_enabled | bool | lower }}
+;allow_sign_up = {{ grafana_auth_github_allow_signup | bool | lower }}
+;client_id = {{ grafana_auth_github_client_id }}
+;client_secret = {{ grafana_auth_github_client_secret }}
+;scopes = {{ grafana_auth_github_scopes }}
+;auth_url = {{ grafana_auth_github_auth_url }}
+;token_url = {{ grafana_auth_github_token_url }}
+;api_url = {{ grafana_auth_github_api_url }}
+;team_ids = {{ grafana_auth_github_team_ids | default( ) }}
+;allowed_organizations = {{ grafana_auth_github_allowed_organizations | default( ) }}
+
+[auth.google]
+;enabled = {{ grafana_auth_google_enable | bool | lower }}
+;allow_sign_up = {{ grafana_auth_google_allow_sign_up | bool | lower }}
+;client_id = {{ grafana_auth_google_client_id }}
+;client_secret = {{ grafana_auth_google_client_secret }}
+;scopes = {{ grafana_auth_google_scopes }}
+;auth_url = {{ grafana_auth_google_auth_url }}
+;token_url = {{ grafana_auth_google_token_url }}
+;api_url = {{ grafana_auth_google_api_url }}
+;allowed_domains = {{ grafana_auth_google_allowed_domains | default( ) }}
+
+[auth.generic_oauth]
+;enabled = {{ grafana_auth_generic_oauth_enabled | bool | lower }}
+;name = {{ grafana_auth_generic_oauth_name }}
+;allow_sign_up = {{ grafana_auth_generic_oauth_allow_sign_up | bool | lower }}
+;client_id = {{ grafana_auth_generic_oauth_client_id }}
+;client_secret = {{ grafana_auth_generic_oauth_client_secret }}
+;scopes = {{ grafana_auth_generic_oauth_scopes }}
+;auth_url = {{ grafana_auth_generic_oauth_auth_url }}
+;token_url = {{ grafana_auth_generic_oauth_token_url }}
+;api_url = {{ grafana_auth_generic_oauth_api_url }}
+;team_ids = {{ grafana_auth_generic_oauth_team_ids | default( ) }}
+;allowed_organizations = {{ grafana_auth_generic_oauth_allowed_organizations }}
+
+[auth.grafananet]
+;enabled = {{ grafana_auth_grafananet_enabled | bool | lower }}
+;allow_sign_up = {{ grafana_auth_grafananet_allow_sign_up | bool | lower }}
+;client_id = {{ grafana_auth_grafananet_client_id }}
+;client_secret = {{ grafana_auth_grafananet_client_secret }}
+;scopes = {{ grafana_auth_grafananet_scopes }}
+;allowed_organizations = {{ grafana_auth_grafananet_allowed_organizations | default( ) }}
+
+[auth.proxy]
+;enabled = {{ grafana_auth_proxy_enabled | bool | lower }}
+;header_name = {{ grafana_auth_proxy_header_name }}
+;header_property = {{ grafana_auth_proxy_header_property }}
+;auto_sign_up = {{ grafana_auth_proxy_auto_sign_up | bool | lower }}
+;ldap_sync_ttl = {{ grafana_auth_proxy_ldap_sync_ttl | default( ) }}
+;whitelist = {{ grafana_auth_proxy_whitelist }}
+
+[auth.basic]
+;enabled = {{ grafana_auth_basic_enabled | bool | lower }}
+
+[auth.ldap]
+;enabled = {{ grafana_auth_ldap_enabled | bool | lower }}
+;config_file = {{ grafana_auth_ldap_config_file }}
+;allow_sign_up = {{ grafana_auth_ldap_allow_sign_up | bool | lower }}
+
+[smtp]
+;enabled = {{ grafana_smtp_enabled | bool | lower }}
+;host = {{ grafana_smtp_host }}
+;user = {{ grafana_smtp_user | default( ) }}
+;password = {{ grafana_smtp_password | default( ) }}
+;cert_file = {{ grafana_smtp_cert_file | default( ) }}
+;key_file = {{ grafana_smtp_key_file | default( ) }}
+;skip_verify = {{ grafana_smtp_skip_verify | bool | lower }}
+;from_address = {{ grafana_smtp_from_address }}
+
+[emails]
+;welcome_email_on_sign_up = {{ grafana_emails_welcome_email | bool | lower }}
+
+[log]
+;mode = {% for mode in grafana_log_mode %}{{ mode }}{% endfor %}
+;level = {{ grafana_log_level }}
+;filters = {{ grafana_log_filters | default( ) }}
+
+[log.console]
+;level = {{ grafana_log_console_level | default( ) }}
+
+;format = {{ grafana_log_console_format }}
+
+[log.file]
+;level = {{ grafana_log_file_level | default( ) }}
+
+;format = {{ grafana_log_file_line_format }}
+
+;log_rotate = {{ grafana_log_file_log_rotate | bool | lower }}
+
+;max_lines = {{ grafana_log_file_max_lines }}
+
+;max_size_shift = {{ grafana_log_file_max_size_shift }}
+
+;daily_rotate = {{ grafana_log_file_daily_rotate | bool | lower }}
+
+;max_days = {{ grafana_log_file_max_days }}
+
+[log.syslog]
+;level = {{ grafana_log_syslog_level | default( ) }}
+
+;format = {{ grafana_log_syslog_format }}
+
+;network = {{ grafana_log_syslog_network | default( ) }}
+;address = {{ grafana_log_syslog_address | default( ) }}
+
+;facility = {{ grafana_log_syslog_facility | default( ) }}
+
+;tag = {{ grafana_log_syslog_tag | default( ) }}
+
+[event_publisher]
+;enabled = {{ grafana_event_publisher_enabled | bool | lower }}
+;rabbitmq_url = {{ grafana_event_publisher_url }}
+;exchange = {{ grafana_event_publisher_exchange }}
+
+[dashboards.json]
+;enabled = {{ grafana_dashboards_json_enabled | bool | lower }}
+;path = {{ grafana_dashboards_json_path }}
+
+[alerting]
+;execute_alerts = {{ grafana_altering_execute_alerts | bool | lower }}
+
+[metrics]
+;enabled = {{ grafana_metrics_enabled | bool | lower }}
+;interval_seconds  = {{ grafana_publish_interval }}
+
+[metrics.graphite]
+;address = {{ grafana_metrics_graphite_address | default() }}
+;prefix = {{ grafana_metrics_graphite_prefix }}
+
+[grafana_net]
+;url = {{ grafana_grafana_net_url }}
+
+[external_image_storage]
+;provider = {{ grafana_external_image_storage_provider | default( ) }}
+
+[external_image_storage.s3]
+;bucket_url = {{ grafana_external_image_storage_s3_bucket_url | default( ) }}
+;access_key = {{ grafana_external_image_storage_s3_access_key | default( ) }}
+;secret_key = {{ grafana_external_image_storage_s3_secret_key | default( ) }}
+
+[external_image_storage.webdav]
+;url = {{ grafana_external_image_storage_webdav_url | default( ) }}
+;username = {{ grafana_external_image_storage_webdav_username | default( ) }}
+;password = {{ grafana_external_image_storage_webdav_password | default( ) }}

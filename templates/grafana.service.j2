@@ -1,0 +1,29 @@
+[Unit]
+Description=Grafana instance
+Documentation=http://docs.grafana.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment=GRAFANA_USER={{ grafana_user }}
+Environment=GRAFANA_GROUP={{ grafana_group }}
+Environment=GRAFANA_HOME={{ grafana_home }}
+Environment=LOG_DIR={{ grafana_log_dir }}
+Environment=DATA_DIR={{ grafana_data_dir }}
+Environment=MAX_OPEN_FILES={{ grafana_max_open_files }}
+Environment=CONF_DIR={{ grafana_conf_dir }}
+Environment=CONF_FILE={{ grafana_conf_file }}
+Environment=RESTART_ON_UPGRADE={{ grafana_restart_on_update | bool | lower }}
+Environment=PLUGINS_DIR={{ grafana_plugins_dir }}
+Environment=PATH=/bin:/usr/bin:/usr/local/bin:/opt/grafana-{{ grafana_installed_version.stdout }}/bin
+User=root
+Group=root
+Type=simple
+Restart=on-failure
+WorkingDirectory=/opt/grafana-{{ grafana_installed_version.stdout }}/
+ExecStart=/opt/grafana-{{ grafana_installed_version.stdout }}/bin/grafana-server --config={{ grafana_conf_dir }}/{{ grafana_conf_file }} --pidfile=/var/run/grafana.pid
+LimitNOFILE={{ grafana_limit_no_file }}
+TimeoutStopSec={{ grafana_timeout }}
+
+[Install]
+WantedBy=multi-user.target
