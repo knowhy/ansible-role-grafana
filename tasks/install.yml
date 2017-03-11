@@ -38,14 +38,9 @@
 
   when: grafana_build == 'release'
 
-- name: Get latest installed Grafana version.
-  shell: ls -l /opt/ | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
-  register: grafana_installed_version
-  changed_when: False
-
 - name: Unpack Grafana package archive.
   unarchive:
-    src: "/opt/grafana-{{ grafana_installed_version.stdout }}.linux-x64.tar.gz"
+    src: "/opt/grafana-{{ grafana_version }}.linux-x64.tar.gz"
     dest: /opt/
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
