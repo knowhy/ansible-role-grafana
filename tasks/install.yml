@@ -39,9 +39,24 @@
   when: grafana_build == 'release'
 
 - name: Unpack Grafana package archive.
-  unarchive:
-    src: "/opt/grafana-{{ grafana_version }}.linux-x64.tar.gz"
-    dest: /opt/
+  shell: "cd /opt && tar xfz grafana-{{ grafana_version }}.linux-x64.tar.gz"
+  changed_when: False
+
+- name: Get latest installed Grafana version.
+  shell: ls -l /opt/ | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
+  register: grafana_installed_version
+  changed_when: False
+
+- name: Set permissions for grafana_home.
+  file:
+    path: "/opt/grafana-{{ grafana_installed_version }}"
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
-    mode: 0777
+    recurse: True
+
+# - name: Unpack Grafana package archive.
+#   unarchive:
+#     src: "/opt/grafana-{{ grafana_version }}.linux-x64.tar.gz"
+#     dest: /opt/
+#     owner: "{{ grafana_user }}"
+#     group: "{{ grafana_group }}"
