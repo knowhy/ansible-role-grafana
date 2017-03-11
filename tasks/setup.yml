@@ -4,6 +4,7 @@
   shell: ls /opt/ | grep grafana | grep -v tar | tail -n 1 | cut -d - -f 2-3
   register: grafana_installed_version
   when: grafana_version == 'latest'
+  changed_when: False
 
 - set_fact:
     grafana_installed_version: "{{ grafana_version }}"
