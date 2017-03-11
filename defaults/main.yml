@@ -24,6 +24,7 @@ grafana_protocol: http
 grafana_limit_no_file: 10000
 
 grafana_plugins: False
+grafana_cleanup: False
 
 grafana_instance_name: grafana
 grafana_app_mode: production

@@ -9,3 +9,6 @@
 
 - include: plugins.yml
   when: grafana_plugins
+
+- include: cleanup.yml
+  when: grafana_cleanup

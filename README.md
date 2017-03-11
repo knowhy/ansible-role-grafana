@@ -23,14 +23,18 @@ Install / Update Grafana application. Set to `False` to reconfigure Grafana and 
 
 Install / Update Grafana plugins. List / Boolean. When list is set, defined plugins will be installed via `grafana-cli`. Set to `False` to skip installation of plugins.
 
+	grafana_cleanup: False
+
+Cleanup old Grafana versions under /opt. Boolean. Defaults to `False`.
+
 	grafana_version: latest
-	
+
 Grafana version to install. `latest` or any version which describes a build `https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz` is valid. Defaults to `latest`.
 
 User for the Grafana process. Defaults to `grafana`.
 
 	grafana_user: grafana
-	
+
 Group for the Grafana user. Defaults to `grafana`.
 
 	grafana_group: grafana
@@ -42,7 +46,7 @@ Directory for Grafana application data. Defaults to `/usr/share/grafana`.
 Directory where grafana can store logs. Defaults to `/var/log/grafana`.
 
 	grafana_log_dir: /var/log/grafana
-	
+
 Path to where grafana can store temp files, sessions, and the sqlite3 db (if that is used). Defaults to `/var/lib/grafana`.
 
 	grafana_data_dir: /var/lib/grafana
@@ -54,7 +58,7 @@ Max open file limit for Grafana process. Defaults to `10000`.
 Path for Grafana configuration files. Defaults to `/etc/grafana`.
 
 	grafana_conf_dir: /etc/grafana
-	
+
 Grafana ini configuration file. Defaults to `/etc/grafana/grafana.ini`.
 
 	grafana_conf_file: /etc/grafana/grafana.ini
@@ -62,7 +66,7 @@ Grafana ini configuration file. Defaults to `/etc/grafana/grafana.ini`.
 Controls whether to restart Grafana automatically when an update was installed. boolean. Defaults to `True`.
 
 	grafana_restart_on_update: True
-	
+
 Directory where grafana will automatically scan and look for plugins. Defaults to `/var/lib/grafana/plugin`.
 
 	grafana_plugins_dir: /var/lib/grafana/plugin
@@ -70,7 +74,7 @@ Directory where grafana will automatically scan and look for plugins. Defaults t
 Timeout for Grafana server process. Defaults to `20`.
 
 	grafana_timeout: 20
-	
+
 Protocol for Grafana web interfaces. Possible values `http` and `https`
 
 	grafana_protocol: http
@@ -94,7 +98,7 @@ Grafana app mode. Possible values: `production`, `development`. Defaults to `pro
 Instance name for the Grafana installation. Defaults to `HOSTNAME` environment variable value or hostname if HOSTNAME var is empty. Defaults to `${HOSTNAME}`.
 
 	grafana_instance_name: ${HOSTNAME}
-	
+
 The ip address to bind to, empty will bind to all interfaces. Defaults to ` `.
 
 	grafana_http_addr:
@@ -110,7 +114,7 @@ The public facing domain name used to access grafana from a browser. Defaults to
 Redirect to correct domain if host header does not match domain. Prevents DNS rebinding attacks. Boolean. Defaults to `False`.
 
 	grafana_enforce_domain: False
-	
+
 The full public facing url you use in browser, used for redirects and emails. If you use reverse proxy and sub path specify full url (with sub path). Defaults to `http://localhost:3000`.
 
 	grafana_root_url: http://localhost:3000
@@ -122,11 +126,11 @@ Log web requests. Boolean. Defaults to `False`.
 The path relative working path. Defaults to `public`.
 
 	grafana_static_root_path: public
-	
+
 Enable `gzip` compression. Boolean. Defaults to `False`.
-	
+
 	grafana_enable_gzip: False
-	
+
 Path to certificate file for https. Defaults to ` `.
 
 	grafana_cert_file:
@@ -146,23 +150,23 @@ Database host for Grafana internal database. Defaults to `127.0.0.1`.
 Database port for Grafana internal database. Defaults to `3306`.
 
 	grafana_database_port: 3306
-	
+
 Database name for Grafana internal database. Defaults to `grafana`.
 
 	grafana_database_name: grafana
-	
+
 Database name for Grafana internal database. Defaults to `root`.
-	
+
 	grafana_database_user: root
-	
+
 Database password for Grafana internal database. Defaults to `password`.
 
 	grafana_database_password: password
-	
+
 Database ssl_mode for Grafana internal database. For `postgres` only, either `disable`, `require` or `verify-full`. Defaults to `disable`.
 
 	grafana_database_ssl_mode: disable
-	
+
 Path to sqlite3 database file. For "sqlite3" only, path relative to data_path setting. Defaults to `grafana.db`.
 
 	grafana_database_path: grafana.db
@@ -178,7 +182,7 @@ Type of session provider. Either `memory`, `file`, `redis`, `mysql`, `postgres`.
 Redis server IP/DNS for `redis` session provider. Defaults to `127.0.0.1`.
 
 	grafana_redis_address: 127.0.0.1
-	
+
 Redis port for `redis` session provider. Defaults to `6379`.
 
 	grafana_redis_port: 6379
@@ -186,9 +190,9 @@ Redis port for `redis` session provider. Defaults to `6379`.
 Redis pool size for `redis` session provider. Defaults to `100`.
 
 	grafana_redis_pool_size: 100
-	
+
 Redis database name for `redis` session provider. Defaults to `grafana`.
-	
+
 	grafana_redis_database: grafana
 
 MySQL user for MySQL session provider. Defaults to `user`.
@@ -198,43 +202,43 @@ MySQL user for MySQL session provider. Defaults to `user`.
 MySQL user password for MySQL session provider. Defaults to `password`.
 
 	grafana_mysql_password: password
-	
+
 MySQL protocol for MySQL session provider. Defaults to `tcp`.
 
 	grafana_mysql_protocol: tcp
-	
+
 MySQL address for MySQL session provider. Defaults to `127.0.0.1`.
-	
+
 	grafana_mysql_address: 127.0.0.1
-	
+
 MySQL `port` for MySQL session provider. Defaults to `3306`.
 
 	grafana_mysql_port: 3306
-	
+
 MySQL `database name` for MySQL session provider. Defaults to `database_name`.
 
 	grafana_mysql_database_name: database_name
-	
+
 Postgres `user` for postgress session provider. Defaults to `a`.
 
 	grafana_postgres_user: a
-	
+
 Postgres `password` for postgress session provider. Defaults to `b`.
 
 	grafana_postgres_password: b
-	
+
 Postgres `host` for postgress session provider. Defaults to `localhost`.
-	
+
 	grafana_postgres_host: localhost
 
 Postgres `port` for postgress session provider. Defaults to `5432`.
 
 	grafana_postgres_port: 5432
-	
+
 Postgres `database name` for postgress session provider. Defaults to `c`.
 
 	grafana_postgres_database_name: c
-	
+
 Postgres `ssl_mode` for postgress session provider. Defaults to `disable`.
 
 	grafana_postgres_sslmode: disable # disable or enable
@@ -242,7 +246,7 @@ Postgres `ssl_mode` for postgress session provider. Defaults to `disable`.
 Grafana provider config. Defaults to `sessions`.
 
 	grafana_provider_config: sessions
-	
+
 Grafana cookie name. Defaults to `grafana_sess`
 
 	grafana_cookie_name: grafana_sess
@@ -294,9 +298,9 @@ Remember name for Grafana security cookie. Defaults to `grafana_remember`.
 Disable gravatar profile images. Boolean. Defaults to `False`.
 
 	grafana_security_disable_gravatar: False
-	
+
 Data source proxy whitelist. List of dictonaries for data source proxy whitelist. Defaults to ` `.
-	
+
 	grafana_data_source_proxy_whitelist:
 	-
 	ip_domain:
@@ -325,13 +329,13 @@ Github client secret. Defaults to `some_secret`.
 Scopes for Github authentication. Defaults to `user:email,read:org`.
 
 	grafana_auth_github_scopes: user:email,read:org
-	
+
 URL for for Github authentication. Defaults to `https://github.com/login/oauth/authorize`.
-	
+
 	grafana_auth_github_auth_url: https://github.com/login/oauth/authorize
-	
+
 Token URL for Github authentication. Defaults to `https://github.com/login/oauth/access_token`.
-	
+
 	grafana_auth_github_token_url: https://github.com/login/oauth/access_token
 
 API URL for Github authentication. Defaults to `https://api.github.com/user`.
@@ -349,7 +353,7 @@ Allowed organizations for Github authentication. Defaults to ` `.
 Enable Google authentication. Boolean. Defaults to `False`.
 
 	grafana_auth_google_enable: False
-	
+
 Allow sign up for Google authentication. Boolean. Defaults to `True`.
 
 	grafana_auth_google_allow_sign_up: True
@@ -361,7 +365,7 @@ Client id for Google authentication. Defaults to `some_client_id`.
 Client secret for Google authentication. Defaults to `some_client_secret`.
 
 	grafana_auth_google_client_secret: some_client_secret
-	
+
 Scopes for Google authentication. Defaults to `https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email`.
 
 	grafana_auth_google_scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
@@ -369,7 +373,7 @@ Scopes for Google authentication. Defaults to `https://www.googleapis.com/auth/u
 Authentication URL for Google authentication. Defaults to `https://accounts.google.com/o/oauth2/auth`.
 
 	grafana_auth_google_auth_url: https://accounts.google.com/o/oauth2/auth
-	
+
 Token URL for Google authentication. Defaults to `https://accounts.google.com/o/oauth2/token`.
 
 	grafana_auth_google_token_url: https://accounts.google.com/o/oauth2/token
@@ -377,7 +381,7 @@ Token URL for Google authentication. Defaults to `https://accounts.google.com/o/
 API URL for Google authentication. Defaults to `https://www.googleapis.com/oauth2/v1/userinfo`.
 
 	grafana_auth_google_api_url: https://www.googleapis.com/oauth2/v1/userinfo
-	
+
 Allowed domains for Google authentication. Defaults to ` `.
 
 	grafana_auth_google_allowed_domains:
@@ -417,11 +421,11 @@ Token URL for generic oauth authentication. Defaults to `https://foo.bar/login/o
 API URL for generic oauth authentication. Defaults to `https://foo.bar/user`.
 
 	grafana_auth_generic_oauth_api_url: https://foo.bar/user
-	
+
 Team ids for generic oauth authentication. Defaults to ` `.
 
 	grafana_auth_generic_oauth_team_ids:
-	
+
 Allowed organizations for generic oauth authentication. Defaults to ` `.
 
 	grafana_auth_generic_oauth_allowed_organizations:
@@ -429,9 +433,9 @@ Allowed organizations for generic oauth authentication. Defaults to ` `.
 Enable grafananet authentication. Boolean. Defaults to `False`.
 
 	grafana_auth_grafananet_enabled: False
-	
-Allow sign up for grafananet authentication. Boolean. Defaults to `True`. 
-	
+
+Allow sign up for grafananet authentication. Boolean. Defaults to `True`.
+
 	grafana_auth_grafananet_allow_sign_up: True
 
 Client id for grafananet authentication. Defaults to `some_id`.
@@ -441,11 +445,11 @@ Client id for grafananet authentication. Defaults to `some_id`.
 Client secret for grafananet authentication. Defaults to `some_secret`.
 
 	grafana_auth_grafananet_client_secret: some_secret
-	
+
 Scopes for grafananet authentication. Defaults to `user:email`.
 
 	grafana_auth_grafananet_scopes: user:email
-	
+
 Allowed organizations for grafananet authentication. Defaults to ` `.
 
 	grafana_auth_grafananet_allowed_organizations:
@@ -453,19 +457,19 @@ Allowed organizations for grafananet authentication. Defaults to ` `.
 Enable proxy authentication. Boolean. Defaults to `False`.
 
 	grafana_auth_proxy_enabled: False
-	
+
 Header name for proxy authentication. Defaults to `X-WEBAUTH-USER`.
-	
+
 	grafana_auth_proxy_header_name: X-WEBAUTH-USER
 
 Header property for proxy authentication. Defaults to `username`.
 
 	grafana_auth_proxy_header_property: username
-	
+
 Enable auto sign up for proxy authentication. Boolean. Defaults to `True`.
 
 	grafana_auth_proxy_auto_sign_up: True
-	
+
 LDAP sync TTL for proxy authentication. Defaults to ` `.
 
 	grafana_auth_proxy_ldap_sync_ttl:
@@ -481,11 +485,11 @@ Enable basic authentication. Boolean. Defaults to `True`.
 Enable LDAP authentication. Boolean. Defaults to `False`.
 
 	grafana_auth_ldap_enabled: False
-	
+
 LDAP config file for LDAP authentication. Defaults to `/etc/grafana/ldap.toml`.
 
 	grafana_auth_ldap_config_file: /etc/grafana/ldap.toml
-	
+
 Allow sign up for LDAP authentication. Boolean. Defaults to `True`.
 
 	grafana_auth_ldap_allow_sign_up: True
@@ -493,11 +497,11 @@ Allow sign up for LDAP authentication. Boolean. Defaults to `True`.
 Enable SMTP. Boolean. Defaults to `False`.
 
 	grafana_smtp_enabled: False
-	
+
 SMTP host. Defaults to `localhost:25`.
 
 	grafana_smtp_host: localhost:25
-	
+
 Username for SMTP. Defaults to ` `.
 
 	grafana_smtp_user:
@@ -505,19 +509,19 @@ Username for SMTP. Defaults to ` `.
 Password for SMTP. Defaults to ` `.
 
 	grafana_smtp_password:
-	
+
 Certificate file for SMTP. Defaults to ` `.
 
 	grafana_smtp_cert_file:
-	
+
 Keyfile for SMTP. Defaults to ` `.
 
 	grafana_smtp_key_file:
-	
+
 Skip verification for SMTP. Boolean. Defaults to `False`.
 
 	grafana_smtp_skip_verify: False
-	
+
 `From address` for SMTP. Defaults to `admin@grafana.localhost`.
 
 	grafana_smtp_from_address: admin@grafana.localhost
@@ -528,7 +532,7 @@ Send Grafana welcome email. Boolean. Defaults to `False`.
 
 Log modes. List. Either `console`, `file`, `syslog`. Defaults to `console` and `file`.
 
-	grafana_log_mode: 
+	grafana_log_mode:
 	- console
 	- file
 
@@ -635,7 +639,7 @@ Publish interval. Defaults to `10`.
 Send internal metrics to Graphite. Enable by setting the address setting (ex localhost:2003). Defaults to ` `.
 
 	grafana_metrics_graphite_address:
-	
+
 Graphite prefix. Defaults to `prod.grafana.%(instance_name)s.`.
 
 	grafana_metrics_graphite_prefix: prod.grafana.%(instance_name)s.
@@ -680,7 +684,7 @@ none
 Notes
 -----
 
-This role installs Grafana using the build provided under `https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz`. Currently there is no clean-up task implemented to delete outdated application folders.
+This role installs Grafana using the build provided under `https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz`.
 
 Example Playbook
 ----------------
