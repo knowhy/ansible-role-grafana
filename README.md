@@ -688,7 +688,11 @@ none
 Notes
 -----
 
-This role installs Grafana using the build provided under `https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz`.
+This role installs Grafana using the builds provided under `https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz` for nightly builds and `https://s3-us-west-2.amazonaws.com/grafana-releases/master/grafana-{{ grafana_version }}.linux-x64.tar.gz.sha256` for release builds.
+
+This role is tested against `CentOS 7`, `Ubuntu 16.04` and `Ubuntu 14.04` but it should work on any Linux distribution as there are no distribution specific dependencies.
+
+Support for for `upstart` init script is currently not tested.
 
 Example Playbook
 ----------------
