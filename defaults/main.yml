@@ -18,7 +18,7 @@ grafana_conf_file: grafana.ini
 
 grafana_restart_on_update: True
 grafana_service_enabled: False
-grafana_service_start: True
+grafana_service_start: False
 grafana_timeout: 20
 grafana_protocol: http
 grafana_limit_no_file: 10000
