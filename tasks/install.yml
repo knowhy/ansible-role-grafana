@@ -16,6 +16,7 @@
         url: "https://grafanarel.s3.amazonaws.com/builds/grafana-{{ grafana_version }}.linux-x64.tar.gz"
         dest: /opt/
         checksum: "sha256:{{ checksum.stdout }}"
+      register: download_status
 
   when: grafana_build == 'nightly'
 
@@ -35,12 +36,14 @@
         url: "https://s3-us-west-2.amazonaws.com/grafana-releases/master/grafana-{{ grafana_version }}.linux-x64.tar.gz"
         dest: /opt/
         checksum: "sha256:{{ checksum.stdout }}"
+      register: download_status
 
   when: grafana_build == 'release'
 
 - name: Unpack Grafana package archive.
   shell: "cd /opt && tar xfz grafana-{{ grafana_version }}.linux-x64.tar.gz"
   changed_when: False
+  when: download_status.changed
 
 - name: Get latest installed Grafana version.
   shell: ls -l /opt/ | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
