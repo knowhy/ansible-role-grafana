@@ -1,12 +1,9 @@
 ---
 
-- name: Get grafana latest version.
-  shell: ls /opt/ | grep grafana | grep -v tar | tail -n 1 | cut -d - -f 2-3
+- name: Get latest installed Grafana version.
+  shell: ls -l /opt/ | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
   register: grafana_installed_version
   changed_when: False
-
-- set_fact:
-    grafana_installed_version: "{{ grafana_version }}"
 
 - name: Ensure Grafana group is present.
   group:
