@@ -1,7 +1,7 @@
 ---
 # defaults file for ansible-role-grafana
 
-grafana_install_grafana: False
+grafana_install_grafana: True
 
 grafana_version: latest
 grafana_build: release
