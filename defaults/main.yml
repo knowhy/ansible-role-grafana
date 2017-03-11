@@ -4,6 +4,8 @@
 grafana_install_grafana: False
 
 grafana_version: latest
+grafana_build: release
+
 grafana_user: grafana
 grafana_group: grafana
 

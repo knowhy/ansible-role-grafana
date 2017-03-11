@@ -15,6 +15,10 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`) and the comments / documentation from the `sample.ini` example configuration file. Variables which default to `[]` (null value) are not listed in `defaults/main.yml`. Parameters which need a type other than `string` or `integer` have a note with the required variable type.
 
+	grafana_build: release
+
+Build version to use. Valid values are `release` and `nightly`. Defaults to `release`.
+
 	grafana_install_grafana: True
 
 Install / Update Grafana application. Set to `False` to reconfigure Grafana and skip download and installation tasks. Boolean. Defaults to `True`.
