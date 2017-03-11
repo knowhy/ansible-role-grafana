@@ -1,6 +1,8 @@
 ansible-role-grafana
 ====================
 
+[![Build Status](https://travis-ci.org/knowhy/ansible-role-grafana.svg?branch=master)](https://travis-ci.org/knowhy/ansible-role-grafana)
+
 Ansible role to install Grafana metrics application.
 
 Requirements
