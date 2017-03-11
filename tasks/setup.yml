@@ -38,7 +38,7 @@
     - name: Ensure Systemd unit file is present.
       template:
         src: grafana.service.j2
-        dest: /usr/lib/systemd/user/grafana.service
+        dest:  /etc/systemd/system/grafana.service
       register: grafana_unit
 
     - name: Reload Systemd.
