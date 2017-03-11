@@ -52,6 +52,7 @@
 - name: Set permissions for grafana_home.
   file:
     path: "/opt/grafana-{{ grafana_installed_version }}"
+    state: directory
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
     recurse: True
