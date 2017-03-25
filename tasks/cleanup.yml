@@ -3,6 +3,8 @@
 - name: Get outdated grafana versions in filesystem.
   shell: ls /opt/ | grep grafana | grep -v tar | head -n -1
   register: grafana_outdated_versions
+  tags:
+    - skip_ansible_lint
 
 - name: Delete outdated grafana versions from filesystem.
   file:

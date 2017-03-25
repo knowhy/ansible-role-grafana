@@ -23,6 +23,8 @@
       shell: "cat /opt/grafana-{{ grafana_version }}.linux-x64.tar.gz.sha256"
       register: checksum
       changed_when: False
+      tags:
+        - skip_ansible_lint
 
     - name: Download Grafana nightly build package archive.
       get_url:
@@ -44,6 +46,8 @@
       shell: "cat /opt/grafana-{{ grafana_version }}.linux-x64.tar.gz.sha256"
       register: checksum
       changed_when: False
+      tags:
+        - skip_ansible_lint
 
     - name: Download Grafana release build package archive.
       get_url:
@@ -62,6 +66,8 @@
   shell: ls -l /opt/ | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
   register: grafana_installed_version
   changed_when: False
+  tags:
+    - skip_ansible_lint
 
 - name: Set permissions for grafana_home.
   file:
