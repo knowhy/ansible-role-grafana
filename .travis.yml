@@ -36,9 +36,5 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # ansible-lint
-  - docker exec "$(cat ${container_id})" pip install ansible-lint
-  - docker exec "$(cat ${container_id})" ansible-lint /etc/ansible/roles/role_under_test/tests/test.yml
-
 notifications:
 webhooks: https://galaxy.ansible.com/api/v1/notifications/
