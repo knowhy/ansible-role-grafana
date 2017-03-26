@@ -37,7 +37,6 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # ansible-lint
-  - docker exec "$(cat ${container_id})" curl https://bootstrap.pypa.io/get-pip.py | python
   - docker exec "$(cat ${container_id})" pip install ansible-lint
   - docker exec "$(cat ${container_id})" ansible-lint /etc/ansible/roles/role_under_test/tests/test.yml
 
